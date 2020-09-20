@@ -68,9 +68,21 @@ parent public key is never published on the blockchain. If the parent public
 key is kept as secret as BIP32 extended keys are, then the situation is
 analoguos to BIP32's.
 
+## Examples
+A simplified python example is provided.
+
+Install package:
+
+    pip install .
+
+Run tests:
+
+    python3 -m unittest discover -v
+
 ## TODOs
-- More investigation on analogous proposal
-- Add python example
+- More investigation on analogous proposals
+- Add python examples
+- Polish python code
 - Add references
 
 ## Copyright
