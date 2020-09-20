@@ -1,6 +1,6 @@
 # HD wallets with 32 bytes public or private backups for master and subkeys
 
-BIP32 relies on extended keys to derive new keys.
+BIP32 [1] relies on extended keys to derive new keys.
 Extended keys are 78 bytes long, but only key and chaincode (64 or 65 bytes) are
 used to derive new keys.
 
@@ -24,8 +24,8 @@ Define private and public child derivation as follow:
 Notes:
 - The actual main difference with respect to BIP32 is that the chaincode is not
   included in the hash function inputs.
-- The tweak to the parent key is also known as *pay-to-contract* and is the same
-  principle underlying taproot. 
+- The tweak to the parent key is also known as *pay-to-contract* [2] and is the
+  same principle underlying taproot [3].
 - The above formulae suggest a tree structure similar to BIP32, however that
   implies that the number of EC operations to derive a child public key from a
   parent public key is linear in the depth (an EC scalar multiplication and
@@ -47,7 +47,8 @@ With some additional work 32 bytes pubkeys can be used.
 
 ### Two-way mapping mnemonic to child private or public key
 Suppose you have a master keypair, it's possible to harden derive child keys
-and use them as a separate wallet with a common backup (similar scope of BIP85).
+and use them as a separate wallet with a common backup (similar scope of BIP85
+[4]).
 Each child key can be used as master key for another "sub" wallet with the
 master key still being able to spend such funds (same as BIP32). But contrary
 to BIP32 each "sub" wallet has a 32 bytes backup. Which optionally can be mapped
@@ -83,8 +84,21 @@ Run tests:
 - More investigation on analogous proposals
 - Add python examples
 - Polish python code
-- Add references
 
 ## Copyright
 
+`ecc.py` module was copied and adapted from BIP340's pure python reference
+implementation [5].
+
 [MIT](LICENSE)
+
+## References
+[1] https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki
+
+[2] https://blockstream.com/sidechains.pdf Appendix A
+
+[3] https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-January/015614.html
+
+[4] https://github.com/bitcoin/bips/blob/master/bip-0085.mediawiki
+
+[5] https://github.com/bitcoin/bips/blob/master/bip-0340/reference.py
