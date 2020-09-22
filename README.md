@@ -26,12 +26,6 @@ Notes:
   included in the hash function inputs.
 - The tweak to the parent key is also known as *pay-to-contract* [2] and is the
   same principle underlying taproot [3].
-- The above formulae suggest a tree structure similar to BIP32, however that
-  implies that the number of EC operations to derive a child public key from a
-  parent public key is linear in the depth (an EC scalar multiplication and
-  addition for each derivation level).
-  It is possible to reduce the number of EC operations needed by including the
-  full (unhardened) path rather than just one index in the hash function inputs.
 - The hash function input may include additional information, such as the script
   type.
 
