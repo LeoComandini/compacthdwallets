@@ -40,16 +40,35 @@ should be backed up or passed around (e.g. to a hardware device).
 With some additional work 32 bytes pubkeys can be used.
 
 ### Two-way mapping mnemonic to child private or public key
+Most Bitcoin wallets allow restoring only from 12 or 24-words (BIP39 [4])
+mnemonics, which map to 16 or 32 bytes sequences respectively.
+
+From the mnemonic a tree of BIP32 exteneded keys is derived using a
+non-reversable function.
+However each BIP32 extended key needs at least 64 bytes to be represented,
+making unfeasible the usage of standard such as BIP39.
+
+This led to the arise of proposal such as BIP85 [5], which allows to derive
+BIP39 mnemonics and other common backups from a BIP32 extended key.
+
+The above derivation scheme allows intermiate user-friendly backups.
 Suppose you have a master keypair, it's possible to harden derive child keys
-and use them as a separate wallet with a common backup (similar scope of BIP85
-[4]).
-Each child key can be used as master key for another "sub" wallet with the
+and use them as a separate wallet with a common backup.
+Each child key can be used as master key for another child wallet with the
 master key still being able to spend such funds (same as BIP32). But contrary
-to BIP32 each "sub" wallet has a 32 bytes backup. Which optionally can be mapped
-to a, for instance, 24 word BIP39 mnemonic.
+to BIP32 each child wallet has a 32 bytes backup. Which optionally can be
+mapped to a, for instance, 24 word BIP39 mnemonic. This allows to maintain the
+same UX for child wallets.
 
 Since pubkeys can have the same length, it is possible to backup or share
 pubkeys with a similar technique.
+
+A possible use case: Alice wants to teach to her unexperienced son Bob how to
+use a Bitcoin wallet. She already has a wallet with master private key `a`,
+let `i = 2^31` (i.e. `0_h`), she derives `b = a_i = a + h(aG, i)`, maps `b` to
+the backup expected by the wallet (e.g. mnemonic) and gives the backup to Bob.
+Bob can use his wallet as a normal wallet, while Alice can monitor Bob's
+transaction and eventually she can move coins in his place.
 
 ## Disadvantages
 BIP32 is used by almost every existing wallets.
@@ -93,6 +112,8 @@ implementation [5].
 
 [3] https://lists.linuxfoundation.org/pipermail/bitcoin-dev/2018-January/015614.html
 
-[4] https://github.com/bitcoin/bips/blob/master/bip-0085.mediawiki
+[4] https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki
 
-[5] https://github.com/bitcoin/bips/blob/master/bip-0340/reference.py
+[5] https://github.com/bitcoin/bips/blob/master/bip-0085.mediawiki
+
+[6] https://github.com/bitcoin/bips/blob/master/bip-0340/reference.py
