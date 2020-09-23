@@ -65,8 +65,8 @@ pubkeys with a similar technique.
 
 A possible use case: Alice wants to teach to her unexperienced son Bob how to
 use a Bitcoin wallet. She already has a wallet with master private key `a`,
-let `i = 2^31` (i.e. `0_h`), she derives `b = a_i = a + h(aG, i)`, maps `b` to
-the backup expected by the wallet (e.g. mnemonic) and gives the backup to Bob.
+let `i = 2^31` (i.e. `0_h`), she derives `b = a_i = h(a, i)`, maps `b` to the
+backup expected by the wallet (e.g. mnemonic) and gives the backup to Bob.
 Bob can use his wallet as a normal wallet, while Alice can monitor Bob's
 transaction and eventually she can move coins in his place.
 
