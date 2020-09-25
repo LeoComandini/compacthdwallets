@@ -51,7 +51,7 @@ making unfeasible the usage of standard such as BIP39.
 This led to the arise of proposal such as BIP85 [5], which allows to derive
 BIP39 mnemonics and other common backups from a BIP32 extended key.
 
-The above derivation scheme allows intermiate user-friendly backups.
+The above derivation scheme allows intermediate user-friendly backups.
 Suppose you have a master keypair, it's possible to harden derive child keys
 and use them as a separate wallet with a common backup.
 Each child key can be used as master key for another child wallet with the
