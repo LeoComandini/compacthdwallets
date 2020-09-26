@@ -80,7 +80,7 @@ the chaincode.
 However most wallets derive scriptpubkeys from keys from the same depth, so the
 parent public key is never published on the blockchain. If the parent public
 key is kept as secret as BIP32 extended keys are, then the situation is
-analoguos to BIP32's.
+analogous to BIP32's.
 
 ## Examples
 A simplified python example is provided.
